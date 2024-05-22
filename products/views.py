@@ -12,7 +12,7 @@ from .models import Waters, Review, CategoryWaters
 class WaterListView(ListView):
     model = Waters
     template_name = 'water/water_list.html'
-    
+
 
 # class WaterListView(View):
 #     def get(self, request):
@@ -20,19 +20,21 @@ class WaterListView(ListView):
 #         return render(request, 'water/water_list.html', {'water': water})
 
 
-# class WaterListView(View):
-#     def get(self, request):
-#         water = Waters.objects.all().order_by('-id')
-#         water_author = Waters.objects.all()
-#         search_post = request.GET.get('search')
-#         if search_post:
-#             water = Waters.objects.filter(
-#                 Q(name__icontains=search_post)
-#                 # Q(price_incontains=search_post)
-#             )
-#             if not water:
-#                 messages.warning(request, 'No results found')
-#         return render(request, 'water/water_list.html', {'water': water})
+class WaterListView(View):
+    def get(self, request):
+        water = Waters.objects.all().order_by('-id')
+        water_author = Waters.objects.all()
+        search_post = request.GET.get('search')
+        if search_post:
+            water = Waters.objects.filter(
+                Q(name__icontains=search_post)
+                # Q(price_incontains=search_post)
+            )
+            if not water:
+                messages.warning(request, 'No results found')
+                return render(request, 'water/water_list.html', {'water': water})
+
+        return render(request, 'water/water_list.html', {'water_author': water_author})
 
 
 class WaterDetailView(View):
