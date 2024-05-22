@@ -1,0 +1,7 @@
+<form method="post">
+    {% csrf_token %}
+    <p>Siz haqiqatdan ham o'chirishni hohlaysizmi"{{object}}?</p>
+
+    <input type="submit" value="Confirm">
+</form>
+    <a href="{% url 'products:water-detail' object.pk %}">No</a>

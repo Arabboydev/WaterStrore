@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} {{ water.name }} {% endblock %}</title>
+</head>
+
+{% block content %}
+<body>
+    <img src="{{water.image.url}}" height="200px"><br>
+    <h1>Name: {{water.name}}</h1>
+    <h2>Price: {{water.price}}</h2>
+    <h2>Date: {{water.date}}</h2>
+    <h2>Valume: {{water.volume}}</h2>
+    <h2>About: {{water.about}}</h2>
+
+    <a href="{% url 'products:water-delete' water.pk %}">Delete</a>
+
+    {% for review in reviews %}
+        <h4>{{ review.user.username }} | {{ review.star_given}}</h4>
+        <p>{{ review.comment }}</p>
+    {% endfor %}
+
+    <hr><hr>
+
+    {% for water in category_waters %}
+        <img src="{{ water.image.url }}" height="80px"><br>
+        <div>
+            {{ water.name }}
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
+</body>
+
+

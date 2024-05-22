@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Books {% endblock %}
+
+{% block content %}
+<!--<div class="search-container" style="margin-top:10px">-->
+<!--    <form action="{% url 'products:water_list' %}" method="get">-->
+<!--        <input type="search" name="search" placeholder="Search...">-->
+<!--        <button type="submit">Search</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+<a href="{% url 'products:water-create' %}"><br><br><h3>Add water</h3></a><hr><br>
+
+{% for water in waters %}
+    <a href="{% url 'products:water-detail' water.pk %}">{{ water.name }}</a><br><br>
+{% endfor %}
+
+{% endblock %}
+
